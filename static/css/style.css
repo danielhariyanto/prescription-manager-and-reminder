@@ -1,0 +1,124 @@
+*{
+    box-sizing: 0;
+    margin: 0; 
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.hero{
+    background: rgb(141, 235, 235);
+}
+
+.hero-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 95vh;
+}
+
+.column-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 2rem;
+}
+
+.column-right{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+color: black;
+padding: 0 2rem;
+}
+
+.column-right h1{
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.column-right p{
+    margin-bottom: 1rem;
+    font-size: 1.5 rem;
+    line-height: 1.5;
+    border: 8px solid black;
+    padding: 6px 12px; 
+    display: inline-block;
+    border-radius: 36px;
+    font-weight: bold;
+}
+
+.upload-box{
+    font-size: 16px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px black;
+    width: 350px; 
+    outline: none; 
+}
+
+
+form input.submit{
+    padding: 1.21rem 3rem;
+    font-size: 1.5rem;
+}
+.hero-image{
+    width: 80%;
+    height: 80%;
+}
+
+footer{
+    background: black; 
+    color: white; 
+    padding: 10px; 
+    text-align: center; 
+}
+
+form input{
+    padding: 1.1rem 3rem;
+    font-size: 1.5rem;
+    border: none;
+    color: black ; 
+    background:rgb(95, 164, 221);
+    }
+
+
+main p{ 
+    padding: 1rem 3rem; 
+    background: rgb(141, 235, 235);
+    font-size: 4rem;
+    text-align: center;
+    border: none;
+    color: black;
+    font-weight: bold;
+    }
+
+*, 
+
+
+
+@media screen and (max-width: 760px) {
+    .hero-container{
+        grid-template-columns: 1fr;
+    }
+
+    main p{
+        font-size: 2rem;
+
+    }
+}
+
+
+::-webkit-file-upload-button{
+    color: white;
+    background: #206a5d;
+    padding: 20px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 0 1px #6b4559;
+    outline: none; 
+}
+
+::-webkit-file-upload-button:hover{
+    background:#438a5e;
+
+}
