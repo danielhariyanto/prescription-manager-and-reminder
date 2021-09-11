@@ -1,0 +1,52 @@
+<!--USED FOR UPDATING REMINDERS-->
+
+<!--{% extends 'base.html' %}-->
+
+<link rel="stylesheet" href="../static/css/edit.css">
+<!--{% block head %}-->
+<title>PROTOTYPE</title>
+<!--{% endblock %}-->
+
+
+<!--{% block body %}
+  <div class="content">
+    <h1 style="text-align:center">Edit Reminder </h1>
+
+    <div class="form">
+      <form action="/{{session_id}}/edit/{{reminder.id}}" method="POST">
+        <input type="text" name="name" id="name" value="{{reminder.name}}">
+        <input type="submit" value="Save">
+      </form>
+    </div>
+  </div>
+{% endblock %}
+-->
+
+<body>
+  <div>
+    <div class="container">
+      <div class="title">Edit Reminder </div>
+      <br>
+      <div class="content">
+        <form action="#">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Medicine name</span>
+              <input type="text">
+            </div>
+            <div class="input-box">
+              <span class="details">Details</span>
+              <input type="text">
+            </div>
+          </div>
+          <div class="button">
+            <input type="submit" value="Save">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<footer> Copyright DrReminder 2021 </footer>
