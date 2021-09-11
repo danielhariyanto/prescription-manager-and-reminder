@@ -32,7 +32,6 @@ padding: 0 2rem;
 }
 
 .column-right h1{
-    margin-bottom: 1rem;
     font-size: 3rem;
 }
 
@@ -40,8 +39,6 @@ padding: 0 2rem;
     margin-bottom: 1rem;
     font-size: 1.5 rem;
     line-height: 1.5;
-    border: 8px solid black;
-    padding: 6px 12px; 
     display: inline-block;
     border-radius: 36px;
     font-weight: bold;
@@ -51,16 +48,26 @@ padding: 0 2rem;
     font-size: 16px;
     background: white;
     border-radius: 50px;
-    box-shadow: 5px 5px 10px black;
     width: 350px; 
     outline: none; 
 }
 
-
-form input.submit{
-    padding: 1.21rem 3rem;
-    font-size: 1.5rem;
+.upload{
+    font-size: 16px;
+    color: white;
+    background: #206a5d;
+    padding: 20px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 0 1px #6b4559;
+    outline: none; 
 }
+
+.upload:hover{
+    background:#438a5e;
+}
+
+
 .hero-image{
     width: 80%;
     height: 80%;
@@ -72,14 +79,6 @@ footer{
     padding: 10px; 
     text-align: center; 
 }
-
-form input{
-    padding: 1.1rem 3rem;
-    font-size: 1.5rem;
-    border: none;
-    color: black ; 
-    background:rgb(95, 164, 221);
-    }
 
 
 main p{ 
@@ -118,4 +117,5 @@ main p{
 
 ::-webkit-file-upload-button:hover{
     background:#438a5e;
+
 }

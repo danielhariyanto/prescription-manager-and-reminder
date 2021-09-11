@@ -1,11 +1,25 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import uuid
+from image_analysis import ocr_space_file, resize_image
+from werkzeug.utils import secure_filename
+import os
+import json
+from PIL import Image
 
-from sqlalchemy.orm import selectin_polymorphic
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+UPLOAD_FOLDER = 'static/uploads/'
 
 app = Flask(__name__)
+app.secret_key = "secret key"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
@@ -75,8 +89,47 @@ def create_new_session():
 @app.route('/<session_id>', methods=['POST', 'GET'])
 def reminders(session_id):
     if request.method == 'POST':
-        # request must be sent do OCR API
-        # algorithm to decide occurrence datetimes
+
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(f"/{session_id}")
+
+
+        file = request.files['file']
+        if file.filename == '':
+            flash('No image selected for uploading')
+            return redirect(f"/{session_id}")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            resize_image(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            ocr = json.loads(ocr_space_file(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
+            text = ocr['ParsedResults'][0]['ParsedText']
+
+            print(text)
+
+            return redirect(f"/{session_id}")
+        else:
+            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            return redirect(f"/{session_id}")
+
+
+        '''reminder_name = request.form['name']
+        reminder_details = request.form['details']
+        new_reminder = Reminder(reminder_name, reminder_details, session_id)
+
+        db.session.add(new_reminder)
+        db.session.commit()'''
+        return redirect(f'/{session_id}')
+
+    else:
+        reminders = Reminder.query.filter(Reminder.session_id == session_id).order_by(Reminder.date_created).all()
+        return render_template('reminder.html', reminders=reminders, session_id=session_id)
+
+
+@app.route('/<session_id>/add')
+def add(session_id):
+    if request.method == 'POST':
         reminder_name = request.form['name']
         reminder_details = request.form['details']
         new_reminder = Reminder(reminder_name, reminder_details, session_id)
@@ -84,10 +137,9 @@ def reminders(session_id):
         db.session.add(new_reminder)
         db.session.commit()
         return redirect(f'/{session_id}')
-
+    
     else:
-        reminders = Reminder.query.filter(Reminder.session_id == session_id).order_by(Reminder.date_created).all()
-        return render_template('reminder.html', reminders=reminders, session_id=session_id)
+        return render_template('new.html')
 
 
 @app.route('/<session_id>/delete/<id>')
