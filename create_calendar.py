@@ -31,7 +31,10 @@ def create_calendar(calendars, names, details):
                 # Adding events to calendar
                 cal.add_component(event)
 
-    directory = str(Path(__file__).parent.parent) + "/prescription-manager-and-reminder/static/uploads/"
-    f = open(os.path.join(directory, 'example.ics'), 'wb')
+    try:
+        directory = str(Path(__file__).parent.parent) + "/prescription-manager-and-reminder/static/uploads/"
+        f = open(os.path.join(directory, 'example.ics'), 'wb')
+    except:
+        f = open(os.path.join('prescription-manager-and-reminder/static/uploads/example.ics'), 'wb')
     f.write(cal.to_ical())
     f.close()
