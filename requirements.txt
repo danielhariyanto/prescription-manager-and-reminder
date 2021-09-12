@@ -9,4 +9,3 @@ werkzeug
 uuid
 datetime
 pathlib
-PIL==1.1.7
