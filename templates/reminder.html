@@ -70,7 +70,7 @@
                     <p>{{ reminder.date_created.date() }}</p>
                 </div>
                 <div class="table-cell last cell">
-                    <a href="/{{session_id}}/edit/{{reminder.id}}">Edit</a>
+                    <a href="/{{session_id}}/edit?id={{reminder.id}}">Edit</a>
                 </div>
                 <div class="table-cell last cell">
                     <a href="/{{session_id}}/delete/{{reminder.id}}">Delete</a>

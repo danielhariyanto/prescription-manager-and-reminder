@@ -177,16 +177,15 @@ def add(session_id):
 def delete(session_id, id):
     reminder_to_delete = Reminder.query.get_or_404(id)
 
-    # TODO delete instances of calendars
-
     db.session.delete(reminder_to_delete)
     db.session.commit()
 
     return redirect(f'/{session_id}')
 
 
-@app.route('/<session_id>/edit/<id>', methods=['POST', 'GET'])
-def edit(session_id, id):
+@app.route('/<session_id>/edit', methods=['POST', 'GET'])
+def edit(session_id):
+    id = request.args.get('id')
     reminder = Reminder.query.get_or_404(id)
     if request.method == 'POST':
         reminder.name = request.form['name']
@@ -207,7 +206,7 @@ def edit(session_id, id):
         return redirect(f'/{session_id}')
         
     else:
-        return render_template('edit.html', reminder=reminder, session_id=session_id)
+        return render_template('edit.html', id=id, session_id=session_id)
 
 
 @app.route('/<session_id>/tryagain')
