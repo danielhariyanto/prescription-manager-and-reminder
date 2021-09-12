@@ -9,4 +9,4 @@ werkzeug
 uuid
 datetime
 pathlib
-Pillow
+cv2
