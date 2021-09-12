@@ -1,5 +1,4 @@
 import requests
-from Pillow import Image
 
 def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'):
     """ OCR.space API request with local file.
@@ -27,7 +26,7 @@ def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'
     return r.content.decode()
 
 
-def resize_image(filename):
+'''def resize_image(filename):
     # set the base width of the result
     basewidth = 2000
     img = Image.open(filename)
@@ -40,4 +39,4 @@ def resize_image(filename):
         hsize = int((float(img.size[1])*float(wpercent)))
         # resize image and save
         img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        img.save(filename)
+        img.save(filename)'''

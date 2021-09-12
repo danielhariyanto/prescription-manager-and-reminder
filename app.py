@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, flash, send_file
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import uuid
-from image_analysis import ocr_space_file, resize_image
+from image_analysis import ocr_space_file
 from werkzeug.utils import secure_filename
 import os
 import json
@@ -98,7 +98,7 @@ def reminders(session_id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            resize_image(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            #resize_image(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             ocr = json.loads(ocr_space_file(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
             
             try:
