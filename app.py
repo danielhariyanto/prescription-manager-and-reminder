@@ -165,8 +165,6 @@ def add(session_id):
         names = [q.name for q in query]
         details = [q.details for q in query]
 
-        print(calendars)
-
         create_calendar(calendars, names, details)
 
         return redirect(f"/{session_id}")

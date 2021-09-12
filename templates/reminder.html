@@ -54,6 +54,8 @@
                 </div>
                 <div class="table-cell last cell">
                 </div>
+                <div class="table-cell last cell">
+                </div>
             </div>
 
             {% for reminder in reminders %}
@@ -69,7 +71,9 @@
                 </div>
                 <div class="table-cell last cell">
                     <a href="/{{session_id}}/edit/{{reminder.id}}">Edit</a>
-                    <a style="margin-left: 3em" href="/{{session_id}}/delete/{{reminder.id}}">Delete</a>
+                </div>
+                <div class="table-cell last cell">
+                    <a href="/{{session_id}}/delete/{{reminder.id}}">Delete</a>
                 </div>
             </div>
             {% endfor %}
