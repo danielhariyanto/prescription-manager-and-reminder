@@ -35,6 +35,6 @@ def create_calendar(calendars, names, details):
         directory = str(Path(__file__).parent.parent) + "/prescription-manager-and-reminder/static/uploads/"
         f = open(os.path.join(directory, 'example.ics'), 'wb')
     except:
-        f = open(os.path.join('prescription-manager-and-reminder/static/uploads/example.ics'), 'wb')
+        f = open(os.path.join('static/uploads/example.ics'), 'wb')
     f.write(cal.to_ical())
     f.close()
