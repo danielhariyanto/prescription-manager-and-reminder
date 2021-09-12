@@ -119,3 +119,21 @@ main p{
     background:#438a5e;
 
 }
+
+table, th, td {
+    border: 1px solid black;
+    padding: 30px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: linear-gradient(135deg, #71b7e6, #9b59b6);
+    color: black;
+  }
+
+  body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}

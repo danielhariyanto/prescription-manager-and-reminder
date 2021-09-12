@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/reminder-style.css">
+        <title>DrReminder</title>
+    </head>
+
+
+    <body>
+        <div>
+
+            <table>
+                <colgroup>
+                  <col style="width: 0%">
+                  <col style="width: 25%">
+                  <col style="width: 20%">
+                  <col style="width: 25%">
+                  <col style="width: 40%">
+                </colgroup>
+                <tr>
+                  <th>Longitude</th>
+                  <th>Latitude</th>
+                  <th>Cases</th>
+                  <th>Updated</th>
+                  <th></th>
+                </tr>
+                {% for village in villages %}  <!--for loop using Jinja syntax-->
+                  <tr>
+                    <td>{{ village.longitude }}</td>
+                    <td>{{ village.latitude }}</td>
+                    <td>{{ village.population }}</td>
+                    <td>{{ village.date_created.date() }}</td>
+                    <td>
+                      <a href="/update/{{village.id}}">Update</a>
+                      <a style="margin-left: 2em" href="/delete/{{village.id}}">Delete</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+        
+        
+        
+        </div>
+          
+    </body>
+
+
+
+
+</html>
