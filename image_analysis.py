@@ -1,5 +1,5 @@
 import requests
-import cv2
+from PIL import Image
 
 def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'):
     """ OCR.space API request with local file.
@@ -30,7 +30,7 @@ def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'
 def resize_image(filename):
     # set the base width of the result
     basewidth = 2000
-    img = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+    img = Image.open(filename)
 
     width, height = img.size
 
