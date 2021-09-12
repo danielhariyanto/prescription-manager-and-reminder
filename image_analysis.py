@@ -31,9 +31,13 @@ def resize_image(filename):
     # set the base width of the result
     basewidth = 2000
     img = Image.open(filename)
-    # determining the height ratio
-    wpercent = (basewidth/float(img.size[0]))
-    hsize = int((float(img.size[1])*float(wpercent)))
-    # resize image and save
-    img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-    img.save(filename)
+
+    width, height = img.size
+
+    if width > 2000:
+        # determining the height ratio
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        # resize image and save
+        img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+        img.save(filename)

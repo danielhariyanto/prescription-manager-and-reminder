@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/alarm.css">
     <title>DrReminder</title>
 </head>
 
@@ -24,83 +25,64 @@
                 <div style="padding: 1em"></div>
                 <p class="instruction">Click on the "Choose File" button to upload a file:</p>
                 <div class="container"></div>
-                    <form action="/{{session_id}}" method="POST" enctype=multipart/form-data>
-                        <input type="file" name="file" class="upload-box" accept="image/png, image/jpeg">
-                        <input type="submit" class="upload" value="Upload">
-                    </form>
-                </div>
-                <p class="instruction"><a href='/{{session_id}}add'>OR input prescription details manually (click here)</a></p>
+                <form action="/{{session_id}}" method="POST" enctype=multipart/form-data>
+                    <input type="file" name="file" class="upload-box" accept="image/png, image/jpeg">
+                    <input type="submit" class="upload" value="Upload">
+                </form>
+                <br>
+                <p class="instruction">OR input prescription details manually <a href='/{{session_id}}/add'>here</a></p>
+
+                {% if reminders|length >= 1 %}
+                <br>
+                <br>
+                <form action="/{{session_id}}/download" target="_blank">
+                    <input type="submit" class="upload" value="Download calendar">
+                </form>
             </div>
+        </div>
+
+        <div class="table-box">
+            <div class="table-row table-head">
+                <div class="table-cell">
+                    <p>Medicine Name</p>
+                </div>
+                <div class="table-cell">
+                    <p>Details</p>
+                </div>
+                <div class="table-cell">
+                    <p>Date Added</p>
+                </div>
+                <div class="table-cell last cell">
+                </div>
+            </div>
+
+            {% for reminder in reminders %}
+            <div class="table-row">
+                <div class="table-cell">
+                    <p>{{ reminder.name }}</p>
+                </div>
+                <div class="table-cell">
+                    <p>{{ reminder.details }}</p>
+                </div>
+                <div class="table-cell">
+                    <p>{{ reminder.date_created.date() }}</p>
+                </div>
+                <div class="table-cell last cell">
+                    <a href="/{{session_id}}/edit/{{reminder.id}}">Edit</a>
+                    <a style="margin-left: 3em" href="/{{session_id}}/delete/{{reminder.id}}">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+
+        {% else %}
+            </div>
+        </div>
+
+
+
+        {% endif %}
+        </div>
     </section>
-
-
-
-    <main>
-        <div class="reminder-box"></div>
-        <p class="reminder">Today's reminder:</p>
-        <p>{{text}}</p>
-    </main>
-
-    <!--<table class="alarm">
-        <thead>
-            <tr>
-                <th> Medicine </th>
-                    <td> <input type="text" name="medicine-1"></td>
-                    <td> <input type="text" name="medicine-2"></td>
-                    <td> <input type="text" name="medicine-3"></td>
-                <th> Time</th>
-                 
-                
-
-            </tr>
-        </thead>
-    </table>-->
-
-
-    <div class="form">
-        <form action="/{{session_id}}" method="POST">
-            <input type="text" name="name" id="name">
-            <input type="text" name="details" id="details">
-            <input type="submit" value="Add Reminder">
-        </form>
-    </div>
-
-    {% if reminders|length >= 1 %}
-    <table>
-        <colgroup>
-            <col style="width: 50%">
-            <col style="width: 25%">
-            <col style="width: 25%">
-        </colgroup>
-        <tr>
-            <th>Reminder</th>
-            <th>Details</th>
-            <th>Added</th>
-            <th></th>
-        </tr>
-        {% for reminder in reminders %}
-        <!--for loop using Jinja syntax-->
-        <tr>
-            <td>{{ reminder.name }}</td>
-            <td>{{ reminder.details }}</td>
-            <td>{{ reminder.date_created.date() }}</td>
-            <td>
-                <a href="/{{session_id}}/edit/{{reminder.id}}">Edit</a>
-                <a style="margin-left: 3em" href="/{{session_id}}/delete/{{reminder.id}}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-
-
-
-
-
-
-
-
-
 
     <footer>
         <p class="copyright"> Copyright 2021 DrReminder</p>
