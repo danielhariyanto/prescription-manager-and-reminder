@@ -1,5 +1,5 @@
 import requests
-from PIL import Image
+from Pillow import Image
 
 def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'):
     """ OCR.space API request with local file.
